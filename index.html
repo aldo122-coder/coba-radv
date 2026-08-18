@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RC Control Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>RC CONTROL</h1>
+    <p class="subtitle">Monitoring & Control Dashboard</p>
+
+    <!-- DATA SENSOR -->
+    <div class="sensor-grid">
+
+        <div class="card">
+            <h3>uSv/h</h3>
+            <div class="value" id="usv">0.00</div>
+            <span>Radiation</span>
+        </div>
+
+        <div class="card">
+            <h3>CPM</h3>
+            <div class="value" id="cpm">0</div>
+            <span>Counts Per Minute</span>
+        </div>
+
+        <div class="card">
+            <h3>Longitude</h3>
+            <div class="value gps" id="longitude">0.000000</div>
+            <span>GPS</span>
+        </div>
+
+        <div class="card">
+            <h3>Latitude</h3>
+            <div class="value gps" id="latitude">0.000000</div>
+            <span>GPS</span>
+        </div>
+
+    </div>
+
+
+    <!-- SAKLAR -->
+    <div class="control-section">
+
+        <h2>CONTROL</h2>
+
+        <div class="switch-container">
+
+            <!-- SAKLAR 1 -->
+            <div class="switch-card">
+
+                <h3>Saklar 1</h3>
+
+                <div
+                    class="switch"
+                    id="switch1"
+                    onclick="toggleSwitch(1)"
+                >
+                    <div class="switch-circle"></div>
+                </div>
+
+                <div class="switch-status" id="status1">
+                    STOP
+                </div>
+
+            </div>
+
+
+            <!-- SAKLAR 2 -->
+            <div class="switch-card">
+
+                <h3>Saklar 2</h3>
+
+                <div
+                    class="switch"
+                    id="switch2"
+                    onclick="toggleSwitch(2)"
+                >
+                    <div class="switch-circle"></div>
+                </div>
+
+                <div class="switch-status" id="status2">
+                    SELESAI
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- KONTROL RC -->
+<div class="direction-control">
+
+    <!-- RTB -->
+    <button
+        class="rtb-button"
+        onclick="sendRTB()">
+        RTB
+    </button>
+
+
+    <div class="rc-main">
+
+        <!-- KIRI + KANAN -->
+        <div class="side-control">
+
+            <button
+                class="control-button kiri"
+                onpointerdown="pressControl('KIRI', event)"
+                onpointerup="releaseControl(event)"
+                onpointercancel="releaseControl(event)">
+
+                <span class="arrow">◀</span>
+                <span>KIRI</span>
+
+            </button>
+
+
+            <button
+                class="control-button kanan"
+                onpointerdown="pressControl('KANAN', event)"
+                onpointerup="releaseControl(event)"
+                onpointercancel="releaseControl(event)">
+
+                <span class="arrow">▶</span>
+                <span>KANAN</span>
+
+            </button>
+
+        </div>
+
+
+        <!-- MAJU + MUNDUR -->
+        <div class="forward-control">
+
+            <button
+                class="control-button maju"
+                onpointerdown="pressControl('MAJU', event)"
+                onpointerup="releaseControl(event)"
+                onpointercancel="releaseControl(event)">
+
+                <span class="arrow">▲</span>
+                <span>MAJU</span>
+
+            </button>
+
+
+            <button
+                class="control-button mundur"
+                onpointerdown="pressControl('MUNDUR', event)"
+                onpointerup="releaseControl(event)"
+                onpointercancel="releaseControl(event)">
+
+                <span class="arrow">▼</span>
+                <span>MUNDUR</span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- STATUS -->
+    <div class="status-card">
+
+        <h2>STATUS</h2>
+
+        <div class="status-row">
+            <span>Perintah</span>
+            <strong id="command">STOP</strong>
+        </div>
+
+        <div class="status-row">
+            <span>Status Sistem</span>
+            <strong id="systemStatus">READY</strong>
+        </div>
+
+    </div>
+
+
+    <!-- LINK -->
+    <div class="link-section">
+
+        <h2>DATA</h2>
+
+        <button
+            class="link-button spreadsheet"
+            onclick="openSpreadsheet()"
+        >
+            📊 SPREADSHEET
+        </button>
+
+        <button
+            class="link-button datastudio"
+            onclick="openDataStudio()"
+        >
+            📈 DATA STUDIO
+        </button>
+
+    </div>
+
+
+    <footer>
+        RC Monitoring & Control
+    </footer>
+
+</div>
+
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
